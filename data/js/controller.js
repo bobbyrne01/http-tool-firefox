@@ -35,10 +35,10 @@ self.port.on("response", function(responseString) {
 		headers = "";
 	
 	for (var headerName in response.headers) {
-		headers += headerName + " : " + response.headers[headerName] + ", ";
+		headers += headerName + " : " + response.headers[headerName] + "<br/>";
 	}
 	
-	document.getElementById("headers").textContent = headers;
+	document.getElementById("headers").innerHTML = headers;
 	document.getElementById("body").textContent = response.text;
 	document.getElementById("status").textContent = response.status;
 	document.getElementById("statusText").textContent = response.statusText;
