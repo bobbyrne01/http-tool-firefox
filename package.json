@@ -1,0 +1,10 @@
+{
+  "name": "http-requester-firefox",
+  "title": "http requester",
+  "id": "jid1-qLJSwFs6qrJBVg",
+  "description": "Submit http requests with varying headers, bodies etc",
+  "author": "Robert Byrne",
+  "license": "GNU GPL v3",
+  "version": "0.1",
+  "permissions": {"private-browsing": true}
+}
