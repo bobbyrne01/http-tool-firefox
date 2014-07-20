@@ -65,17 +65,28 @@ window.addEventListener('click', function(event) {
 
 
 // Populate Response area with data
-self.port.on("response", function(responseString) {
+self.port.on("response", function(payload) {
 	
-	var response = JSON.parse(responseString),
+	var response = JSON.parse(payload),
 		headers = "";
 	
 	for (var headerName in response.headers) {
 		headers += headerName + " : " + response.headers[headerName] + "<br/>";
 	}
 	
-	document.getElementById("headers").innerHTML = headers;
-	document.getElementById("body").textContent = response.text;
+	
+	if (headers === ""){
+		document.getElementById("headers").innerHTML = "No headers.";
+	}else{
+		document.getElementById("headers").innerHTML = headers;
+	}
+
+	if (response.text === ""){
+		document.getElementById("body").textContent = "No body content.";
+	}else{
+		document.getElementById("body").textContent = response.text;
+	}
+	
 	document.getElementById("status").textContent = response.status;
 	document.getElementById("statusText").textContent = response.statusText;
 	
@@ -88,4 +99,8 @@ self.port.on("response", function(responseString) {
 	}else if (response.status >= 500 && response.status <= 599){
 		document.getElementById("statusListItem").style.backgroundColor = '#CC3333';
 	}
+});
+
+self.port.on("error", function(payload) {
+	document.getElementById("statusListItem").style.backgroundColor = '#FF3333';
 });
