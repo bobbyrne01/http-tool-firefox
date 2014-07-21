@@ -30,19 +30,28 @@ document.getElementById('url').onkeypress = function(e){
 // Populate Response area with data
 self.port.on("response", function(payload) {
 	
-	var response = JSON.parse(payload),
-		headers = "";
+	var response = JSON.parse(payload);
 	
-	for (var headerName in response.headers) {
-		headers += headerName + " : " + response.headers[headerName] + "<br/>";
-	}
-	
-	
-	if (headers === ""){
-		document.getElementById("headers").innerHTML = "No headers.";
+	if (Object.getOwnPropertyNames(response.headers).length){
+		
+		document.getElementById("headers").textContent = "";
+		
+		for (var headerName in response.headers) {
+			
+			var label = document.createElement("label");
+			label.appendChild(document.createTextNode(headerName + " : " + response.headers[headerName]));	
+				
+			document.getElementById("headers").appendChild(label);
+			document.getElementById("headers").appendChild(document.createElement("br"));
+		}
+		
 	}else{
-		document.getElementById("headers").innerHTML = headers;
+		
+		document.getElementById("headers").textContent = "No headers.";
 	}
+	
+	
+	
 
 	if (response.text === ""){
 		document.getElementById("body").textContent = "No body content.";
