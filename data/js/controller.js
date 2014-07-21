@@ -35,15 +35,25 @@ self.port.on("response", function(payload) {
 	if (Object.getOwnPropertyNames(response.headers).length){
 		
 		document.getElementById("headers").textContent = "";
+		var table = document.createElement('table');
+		
+		table.border = 1;
+		table.style = 'border-collapse:collapse';
 		
 		for (var headerName in response.headers) {
 			
-			var label = document.createElement("label");
-			label.appendChild(document.createTextNode(headerName + " : " + response.headers[headerName]));	
-				
-			document.getElementById("headers").appendChild(label);
-			document.getElementById("headers").appendChild(document.createElement("br"));
+			var tr = document.createElement("tr"),
+				tdName = document.createElement("td"),
+				tdValue = document.createElement("td");
+			
+			tdName.appendChild(document.createTextNode(headerName));
+			tdValue.appendChild(document.createTextNode(response.headers[headerName]));
+			tr.appendChild(tdName);
+			tr.appendChild(tdValue);
+			table.appendChild(tr);
 		}
+		
+		document.getElementById("headers").appendChild(table);
 		
 	}else{
 		
@@ -56,7 +66,14 @@ self.port.on("response", function(payload) {
 	if (response.text === ""){
 		document.getElementById("body").textContent = "No body content.";
 	}else{
-		document.getElementById("body").textContent = response.text;
+		
+		document.getElementById("body").textContent = "";
+		var textarea = document.createElement('textarea');
+		
+		textarea.rows = 25;
+		textarea.cols = 200;
+		textarea.appendChild(document.createTextNode(response.text));
+		document.getElementById("body").appendChild(textarea);
 	}
 	
 	document.getElementById("status").textContent = response.status;
