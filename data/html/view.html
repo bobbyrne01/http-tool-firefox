@@ -7,58 +7,50 @@
 	<body>
 	
 		<h2>Request</h2>
-		<form>
-			<table>
-				<tr>
-					<td>
-						<input id="url" placeholder="Request URL .." size="100"></input>
-					</td>
-					<td>
-						<select id="method">
-							<option value="0">GET</option>
-						  	<option value="1">HEAD</option>
-							<option value="2">POST</option>
-							<option value="3">PUT</option>
-							<option value="4">DELETE</option>
-						</select> 
-					</td>
-					<td>
-						<button type="button" id="submit">Submit</button>
-					</td>
-					<td>
-						<button type="button" id="reset">Reset</button>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<ul class="tabs"> 
-							<li><a href="#headersRequest">Headers</a></li>
-							<li><a href="#bodyRequest">Body content</a></li>
-						</ul> 
-						
-						<div class="tabcontents"> 
-							<div id="headersRequest">
-								<table id="headersRequestTable">
-									<tr>
-										<th>Name</th>
-										<th>Value</th>
-										<th><input type="button" id="newHeaderButton" value="+" /></th>
-									</tr>
-									<tr>
-										<td><input id="headerName1" length="25"></input></td>
-										<td><input id="headerValue1" length="25"></input></td>
-										<td></td>
-									</tr>
-								</table>								
-							</div> 
-							<div id="bodyRequest">
-								<textarea id="bodyRequestListItem" rows="10" cols="200"></textarea>
-							</div> 
-						</div>
-					</td>
-				</tr>
-			</table>
-		</form>
+		<div>
+			<div>
+				<input id="url" placeholder="Request URL .." size="75"></input>
+			</div><br/>
+			<div>
+				<select id="method">
+					<option value="0">GET</option>
+				  	<option value="1">HEAD</option>
+					<option value="2">POST</option>
+					<option value="3">PUT</option>
+					<option value="4">DELETE</option>
+				</select> 
+
+				<button type="button" id="submit">Submit</button>
+				<button type="button" id="reset">Reset</button>
+			</div><br/>
+			
+			<div>	
+				<ul class="tabs"> 
+					<li><a href="#headersRequest">Headers</a></li>
+					<li><a href="#bodyRequest">Body content</a></li>
+				</ul> 
+				
+				<div class="tabcontents"> 
+					<div id="headersRequest">
+						<table id="headersRequestTable">
+							<tr>
+								<th>Name</th>
+								<th>Value</th>
+								<th><input type="button" id="newHeaderButton" value="+" /></th>
+							</tr>
+							<tr>
+								<td><input id="headerName1" length="25"></input></td>
+								<td><input id="headerValue1" length="25"></input></td>
+								<td></td>
+							</tr>
+						</table>								
+					</div> 
+					<div id="bodyRequest">
+						<textarea id="bodyRequestListItem" rows="10" cols="100"></textarea>
+					</div> 
+				</div>
+			</div>
+		</div>
 		<hr>
 		
 		<h2>Response</h2>
@@ -69,7 +61,7 @@
 			<li><a href="#statusText">Status text</a></li> 
 		</ul> 
 		
-		<div class="tabcontents"> 
+		<div class="tabcontents">
 			<div id="headers"></div> 
 			<div id="body"></div> 
 			<div id="status"></div> 

@@ -61,3 +61,21 @@ div.tabcontents
 {
     border-top: 1px solid #CCC; padding: 30px 10px;
 }
+
+
+/* Taken and modified from: http://stackoverflow.com/a/7220510 */
+pre {
+    outline: 1px solid #ccc; 
+    padding: 5px; 
+    margin: 5px; 
+    white-space: pre-wrap;       
+    white-space: -moz-pre-wrap;  
+    white-space: -pre-wrap;      
+    white-space: -o-pre-wrap;    
+    word-wrap: break-word;       
+}
+.string { color: green; }
+.number { color: darkorange; }
+.boolean { color: blue; }
+.null { color: magenta; }
+.key { color: red; }

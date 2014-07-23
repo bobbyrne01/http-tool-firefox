@@ -32,6 +32,8 @@ self.port.on("response", function(payload) {
 	
 	var response = JSON.parse(payload);
 	
+	
+	// handle headers
 	if (Object.getOwnPropertyNames(response.headers).length){
 		
 		document.getElementById("headers").textContent = "";
@@ -62,20 +64,35 @@ self.port.on("response", function(payload) {
 	
 	
 	
-
+	// handle body content
 	if (response.text === ""){
 		document.getElementById("body").textContent = "No body content.";
 	}else{
 		
 		document.getElementById("body").textContent = "";
-		var textarea = document.createElement('textarea');
+		var pre = document.createElement('pre');
+		pre.id = "bodyCode";
 		
-		textarea.rows = 25;
-		textarea.cols = 200;
-		textarea.appendChild(document.createTextNode(response.text));
-		document.getElementById("body").appendChild(textarea);
+		try{
+			
+			document.getElementById("body").appendChild(pre);
+			
+			var highlightedJson = syntaxHighlight(JSON.stringify(JSON.parse(response.text), undefined, 4)),
+				range = document.createRange();
+			
+			range.selectNode(pre);
+			var docFrag = range.createContextualFragment(highlightedJson);
+
+			document.getElementById("bodyCode").appendChild(docFrag);
+		
+		}catch(e){
+			pre.appendChild(document.createTextNode(response.text));
+			document.getElementById("body").appendChild(pre);
+		}
 	}
 	
+	
+	// handle status code and text
 	document.getElementById("status").textContent = response.status;
 	document.getElementById("statusText").textContent = response.statusText;
 	
@@ -158,4 +175,29 @@ var httprequester = {
 		tr.appendChild(inputButton);
 		document.getElementById("headersRequestTable").appendChild(tr);
 	}
+}
+
+
+// Taken from: http://stackoverflow.com/a/7220510
+function syntaxHighlight(json) {
+	
+	var jsonElements;
+	
+    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+    	
+    	var cls = 'number';
+        if (/^"/.test(match)) {
+            if (/:$/.test(match)) {
+                cls = 'key';
+            } else {
+                cls = 'string';
+            }
+        } else if (/true|false/.test(match)) {
+            cls = 'boolean';
+        } else if (/null/.test(match)) {
+            cls = 'null';
+        }
+        return '<span class="' + cls + '">' + match + '</span>';
+    });
 }
