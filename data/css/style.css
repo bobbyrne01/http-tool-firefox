@@ -63,6 +63,11 @@ div.tabcontents
 }
 
 
+.wrapAll {
+	word-break: break-all
+}
+
+
 /* Taken and modified from: http://stackoverflow.com/a/7220510 */
 pre {
     outline: 1px solid #ccc; 

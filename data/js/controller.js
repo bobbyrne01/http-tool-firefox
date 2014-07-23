@@ -48,6 +48,8 @@ self.port.on("response", function(payload) {
 				tdName = document.createElement("td"),
 				tdValue = document.createElement("td");
 			
+			tdValue.className = 'wrapAll';
+			
 			tdName.appendChild(document.createTextNode(headerName));
 			tdValue.appendChild(document.createTextNode(response.headers[headerName]));
 			tr.appendChild(tdName);
