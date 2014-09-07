@@ -1,3 +1,12 @@
+window.onload = function() {
+	var requestTabs = new ddtabcontent('requestTabs'),
+		responseTabs = new ddtabcontent('responseTabs');
+	
+	requestTabs.init();
+	responseTabs.init();
+};
+
+
 // listen for click events on UI
 window.addEventListener('click', function(event) {
 	
