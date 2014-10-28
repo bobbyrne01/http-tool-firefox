@@ -1,10 +1,8 @@
-window.onload = function() {
-	var requestTabs = new ddtabcontent('requestTabs'),
-		responseTabs = new ddtabcontent('responseTabs');
-	
-	requestTabs.init();
-	responseTabs.init();
-};
+var requestTabs = new ddtabcontent('requestTabs'),
+	responseTabs = new ddtabcontent('responseTabs');
+
+requestTabs.init();
+responseTabs.init();
 
 
 // listen for click events on UI
@@ -12,15 +10,15 @@ window.addEventListener('click', function(event) {
 	
 	if (event.target.id.indexOf('submit') === 0){
 		
-		httprequester.submit();
+		httptool.submit();
 		
 	} else if (event.target.id.indexOf('reset') === 0){
 		
-		httprequester.reset();
+		httptool.reset();
 	
 	}else if (event.target.id.indexOf('newHeaderButton') === 0){
 		
-		httprequester.addHeader();
+		httptool.addHeader();
 	}
 }, false);
 
@@ -31,7 +29,7 @@ document.getElementById('url').onkeypress = function(e){
     var keyCode = e.keyCode || e.which;
     if (keyCode == '13'){
     
-    	httprequester.submit();
+    	httptool.submit();
     }
 }
 
@@ -124,7 +122,7 @@ self.port.on("error", function(payload) {
 });
 
 
-var httprequester = {
+var httptool = {
 		
 	submit: function() {
 		var headers = {};
