@@ -51,7 +51,8 @@ module.exports = function (grunt) {
 		validation: {
 			options: {
 				stoponerror: false,
-				reset: true
+				reset: true,
+				relaxerror: ['Bad value [a-zA-Z]+ for attribute rel on element a: The string [a-zA-Z]+ is not a registered keyword.'] //ignores these errors, used by tabcontent.js
 			},
 			files: {
 				src: ['addon/data/html/*.html']
