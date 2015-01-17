@@ -11,7 +11,6 @@ function submitRequest(queryString) {
 		query.url = "http://" + query.url;
 	}
 
-
 	var req = Request({
 		url: query.url,
 		headers: query.headers,
@@ -49,7 +48,7 @@ function submitRequest(queryString) {
 
 		Tabs.sendMsg('error', 'Error occurred.');
 	}
-};
+}
 
 exports.submitRequest = function (query) {
 	return submitRequest(query);

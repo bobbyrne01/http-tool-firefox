@@ -15,7 +15,7 @@ function init() {
 		},
 		onClick: handleClick
 	});
-};
+}
 
 exports.init = function () {
 	return init();

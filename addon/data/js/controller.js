@@ -27,11 +27,11 @@ window.addEventListener('click', function (event) {
 document.getElementById('url').onkeypress = function (e) {
 	if (!e) e = window.event;
 	var keyCode = e.keyCode || e.which;
-	if (keyCode == '13') {
+	if (keyCode === '13') {
 
 		httptool.submit();
 	}
-}
+};
 
 
 // Populate Response area with data
@@ -151,7 +151,7 @@ var httptool = {
 
 	reset: function () {
 		document.getElementById("method").selectedIndex = 0;
-		document.getElementById("url").value = ""
+		document.getElementById("url").value = "";
 		document.getElementById("headers").textContent = "";
 		document.getElementById("body").textContent = "";
 		document.getElementById("status").textContent = "";
@@ -168,9 +168,8 @@ var httptool = {
 			inputValue = document.createElement("input"),
 			inputButton = document.createElement("input");
 
-		inputName.length = 25;
-		inputValue.length = 25;
-		inputButton.length = 25;
+		inputName.size = 25;
+		inputValue.size = 25;
 		inputButton.type = "button";
 		inputButton.value = "-";
 		inputButton.onclick = function () {
@@ -184,7 +183,7 @@ var httptool = {
 		tr.appendChild(inputButton);
 		document.getElementById("headersRequestTable").appendChild(tr);
 	}
-}
+};
 
 
 // Taken from: http://stackoverflow.com/a/7220510

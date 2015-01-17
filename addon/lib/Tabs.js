@@ -3,7 +3,6 @@ var Tabs = require("sdk/tabs"),
 	Request = require("./Request"),
 	worker;
 
-
 exports.open = function () {
 	return open();
 };
@@ -15,7 +14,7 @@ function open(state) {
 		onReady: function onReady(tab) {
 
 			worker = tab.attach({
-				contentScriptFile: [Data.get('js/tabcontent.js'), Data.get('js/controller.js')],
+				contentScriptFile: [Data.get('lib/tabcontent.js'), Data.get('js/controller.js')],
 				onMessage: function (message) {
 
 					var input = JSON.parse(message);
@@ -27,7 +26,7 @@ function open(state) {
 			});
 		}
 	});
-};
+}
 
 exports.sendMsg = function (operation, response) {
 	return sendMsg(operation, response);
@@ -35,4 +34,4 @@ exports.sendMsg = function (operation, response) {
 
 function sendMsg(operation, response) {
 	worker.port.emit(operation, response);
-};
+}
