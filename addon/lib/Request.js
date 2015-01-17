@@ -3,11 +3,11 @@ var Request = require("sdk/request").Request,
 
 function submitRequest(queryString) {
 
-	var query = JSON.parse(queryString);	
-	
+	var query = JSON.parse(queryString);
+
 	if (query.url.toLowerCase().indexOf("http://") < 0 &&
-			query.url.toLowerCase().indexOf("https://") < 0){
-		
+		query.url.toLowerCase().indexOf("https://") < 0) {
+
 		query.url = "http://" + query.url;
 	}
 
@@ -15,41 +15,42 @@ function submitRequest(queryString) {
 	var req = Request({
 		url: query.url,
 		headers: query.headers,
-		onComplete: function (response) {		
-			
+		onComplete: function (response) {
+
 			var payload = JSON.stringify({
 				text: response.text,
 				status: response.status,
 				statusText: response.statusText,
-				headers: response.headers});
-				
+				headers: response.headers
+			});
+
 			Tabs.sendMsg('response', payload);
 		}
 	});
 
-	try{
-		
-		if (query.method == 'GET'){
+	try {
+
+		if (query.method == 'GET') {
 			req.get();
-		}else if (query.method == 'POST'){
+		} else if (query.method == 'POST') {
 			req.content = query.content;
 			req.post();
-		}else if (query.method == 'PUT'){
+		} else if (query.method == 'PUT') {
 			req.content = query.content;
 			req.put();
-		}else if (query.method == 'HEAD'){
+		} else if (query.method == 'HEAD') {
 			req.head();
-		}else if (query.method == 'DELETE'){
+		} else if (query.method == 'DELETE') {
 			req.content = query.content;
 			req.delete();
 		}
-	
-	}catch(e){
-		
+
+	} catch (e) {
+
 		Tabs.sendMsg('error', 'Error occurred.');
 	}
 };
 
-exports.submitRequest = function(query){
+exports.submitRequest = function (query) {
 	return submitRequest(query);
 };
