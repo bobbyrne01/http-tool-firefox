@@ -27,8 +27,7 @@ window.addEventListener('click', function (event) {
 document.getElementById('url').onkeypress = function (e) {
 	if (!e) e = window.event;
 	var keyCode = e.keyCode || e.which;
-	if (keyCode === '13') {
-
+	if (keyCode === 13) {
 		httptool.submit();
 	}
 };
@@ -128,13 +127,14 @@ var httptool = {
 		var headers = {};
 
 		// Identify if headers need to be sent in request
-		for (var i = 1, row; row = document.getElementById("headersRequestTable").rows[i]; i++) {
+		for (var i = 1; i < document.getElementById("headersRequestTable").rows.length; i++) {
+
+			var row = document.getElementById("headersRequestTable").rows[i];
 
 			if (!(row.cells[0].firstElementChild.value === '' || row.cells[1].firstElementChild.value === '')) {
 				headers[row.cells[0].firstElementChild.value] = row.cells[1].firstElementChild.value;
 			}
 		}
-
 
 		var input = JSON.stringify({
 			operation: 'submit',
