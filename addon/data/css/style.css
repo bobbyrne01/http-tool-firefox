@@ -13,6 +13,10 @@
 .w100 {
 	width: 100%;
 }
+.bCollapse {
+	border-collapse: collapse;
+}
+
 /* Taken and modified for JSON highlighting from: http://stackoverflow.com/a/7220510 */
 
 pre {

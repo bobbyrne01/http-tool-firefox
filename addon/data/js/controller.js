@@ -46,15 +46,16 @@ self.port.on("response", function (payload) {
 		var table = document.createElement('table');
 
 		table.border = 1;
-		table.style = 'border-collapse:collapse';
+		table.className = 'bCollapse w100';
 
 		for (var headerName in response.headers) {
 
 			var tr = document.createElement("tr"),
 				tdName = document.createElement("td"),
 				tdValue = document.createElement("td");
-
-			tdValue.className = 'wrapAll';
+			
+			tdName.className = 'w40';
+			tdValue.className = 'w60';
 
 			tdName.appendChild(document.createTextNode(headerName));
 			tdValue.appendChild(document.createTextNode(response.headers[headerName]));
