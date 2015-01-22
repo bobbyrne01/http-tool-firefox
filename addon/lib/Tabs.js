@@ -9,7 +9,6 @@ exports.open = function () {
 };
 
 function open(state) {
-
 	Tabs.open({
 		url: Data.get('html/view.html'),
 		onReady: function onReady(tab) {

@@ -1,6 +1,15 @@
 .left {
 	float: left;
 }
+.right {
+	float: right;
+}
+.center {
+	text-align: center;
+}
+.w30 {
+	width: 30%;
+}
 .w40 {
 	width: 40%;
 }
@@ -16,7 +25,6 @@
 .bCollapse {
 	border-collapse: collapse;
 }
-
 /* Taken and modified for JSON highlighting from: http://stackoverflow.com/a/7220510 */
 
 pre {

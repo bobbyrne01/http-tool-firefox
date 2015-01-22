@@ -38,7 +38,6 @@ self.port.on("response", function (payload) {
 
 	var response = JSON.parse(payload);
 
-
 	// handle headers
 	if (Object.getOwnPropertyNames(response.headers).length) {
 
@@ -53,7 +52,7 @@ self.port.on("response", function (payload) {
 			var tr = document.createElement("tr"),
 				tdName = document.createElement("td"),
 				tdValue = document.createElement("td");
-			
+
 			tdName.className = 'w40';
 			tdValue.className = 'w60';
 
@@ -67,7 +66,6 @@ self.port.on("response", function (payload) {
 		document.getElementById("headers").appendChild(table);
 
 	} else {
-
 		document.getElementById("headers").textContent = "No headers.";
 	}
 
@@ -118,8 +116,8 @@ self.port.on("response", function (payload) {
 
 
 self.port.on("history", function (payload) {
-	httptool.history.push(payload);
-	document.getElementById('historyContainer').textContent = payload;
+	httptool.history = payload;
+	httptool.populateHistory(payload);
 });
 
 
@@ -130,8 +128,7 @@ self.port.on("error", function (payload) {
 
 var httptool = {
 
-	history: [],
-
+	history: null,
 	submit: function () {
 		var headers = {};
 
@@ -156,7 +153,6 @@ var httptool = {
 				})
 			}));
 
-
 		httptool.history.push( // update history in contentScript
 			JSON.stringify({
 				query: JSON.stringify({
@@ -167,9 +163,8 @@ var httptool = {
 				})
 			}));
 
-		document.getElementById('historyContainer').textContent = httptool.history;
+		httptool.populateHistory(httptool.history);
 	},
-
 	reset: function () {
 		document.getElementById("method").selectedIndex = 0;
 		document.getElementById("url").value = "";
@@ -179,8 +174,6 @@ var httptool = {
 		document.getElementById("statusText").textContent = "";
 		document.getElementById("statusListItem").style.backgroundColor = '#F6F6F9';
 	},
-
-
 	addHeader: function () {
 		var tr = document.createElement("tr"),
 			tdName = document.createElement("td"),
@@ -189,8 +182,6 @@ var httptool = {
 			inputValue = document.createElement("input"),
 			inputButton = document.createElement("input");
 
-		inputName.size = 25;
-		inputValue.size = 25;
 		inputButton.type = "button";
 		inputButton.value = "-";
 		inputButton.onclick = function () {
@@ -203,6 +194,32 @@ var httptool = {
 		tr.appendChild(tdValue);
 		tr.appendChild(inputButton);
 		document.getElementById("headersRequestTable").appendChild(tr);
+	},
+	populateHistory: function () {
+
+		while (document.getElementById("historyContainer").firstChild) {
+			document.getElementById("historyContainer").removeChild(document.getElementById("historyContainer").firstChild);
+		}
+
+		var table = document.getElementById('historyContainer');
+		table.border = 1;
+		table.className = 'bCollapse w100';
+
+		for (var i = 0; i < httptool.history.length; i++) {
+
+			var tr = document.createElement("tr"),
+				tdName = document.createElement("td"),
+				tdValue = document.createElement("td");
+
+			tdName.className = 'w40';
+			tdValue.className = 'w60';
+
+			tdName.appendChild(document.createTextNode(JSON.parse(JSON.parse(httptool.history[i]).query).method));
+			tdValue.appendChild(document.createTextNode(JSON.parse(JSON.parse(httptool.history[i]).query).url));
+			tr.appendChild(tdName);
+			tr.appendChild(tdValue);
+			table.appendChild(tr);
+		}
 	}
 };
 

@@ -39,7 +39,6 @@ module.exports = function (grunt) {
 					indentSize: 1,
 					maxPreserveNewlines: 10,
 					preserveNewlines: true,
-					unformatted: ["a", "sub", "sup", "b", "i", "u"],
 					wrapLineLength: 0
 				},
 				css: {
