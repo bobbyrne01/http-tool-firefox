@@ -1,6 +1,7 @@
 var Tabs = require("sdk/tabs"),
 	Data = require("./Data"),
 	Request = require("./Request"),
+	SimpleStorage = require("./SimpleStorage"),
 	worker;
 
 exports.open = function () {
@@ -19,11 +20,14 @@ function open(state) {
 
 					var input = JSON.parse(message);
 
-					if (input.operation == 'submit') {
+					if (input.operation === 'submit') {
 						Request.submitRequest(input.query);
+						SimpleStorage.getHistory().push(input.query);
 					}
 				}
 			});
+
+			sendMsg("history", SimpleStorage.getHistory());
 		}
 	});
 }

@@ -1,10 +1,15 @@
 var {
 	ActionButton
 } = require("sdk/ui/button/action"),
-	Tabs = require("./Tabs");
+	Tabs = require("./Tabs"),
+	SimpleStorage = require("./SimpleStorage");
 
 
 function init() {
+
+	if (typeof SimpleStorage.getHistory() === 'undefined') {
+		SimpleStorage.setHistory([]);
+	}
 
 	var button = ActionButton({
 		id: "http-tool-actionbutton",

@@ -1,4 +1,19 @@
-/* Taken and modified from: http://stackoverflow.com/a/7220510 */
+.left {
+	float: left;
+}
+.w40 {
+	width: 40%;
+}
+.w50 {
+	width: 50%;
+}
+.w60 {
+	width: 60%;
+}
+.w100 {
+	width: 100%;
+}
+/* Taken and modified for JSON highlighting from: http://stackoverflow.com/a/7220510 */
 
 pre {
 	outline: 1px solid #ccc;

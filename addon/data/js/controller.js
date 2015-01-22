@@ -116,12 +116,20 @@ self.port.on("response", function (payload) {
 });
 
 
+self.port.on("history", function (payload) {
+	httptool.history.push(payload);
+	document.getElementById('historyContainer').textContent = payload;
+});
+
+
 self.port.on("error", function (payload) {
 	document.getElementById("statusListItem").style.backgroundColor = '#FF3333';
 });
 
 
 var httptool = {
+
+	history: [],
 
 	submit: function () {
 		var headers = {};
@@ -136,17 +144,29 @@ var httptool = {
 			}
 		}
 
-		var input = JSON.stringify({
-			operation: 'submit',
-			query: JSON.stringify({
-				url: document.getElementById("url").value,
-				method: document.getElementById("method").options[document.getElementById("method").selectedIndex].text,
-				content: document.getElementById("bodyRequestListItem").value,
-				headers: headers
-			})
-		});
+		self.postMessage( // submit req
+			JSON.stringify({
+				operation: 'submit',
+				query: JSON.stringify({
+					url: document.getElementById("url").value,
+					method: document.getElementById("method").options[document.getElementById("method").selectedIndex].text,
+					content: document.getElementById("bodyRequestListItem").value,
+					headers: headers
+				})
+			}));
 
-		self.postMessage(input);
+
+		httptool.history.push( // update history in contentScript
+			JSON.stringify({
+				query: JSON.stringify({
+					url: document.getElementById("url").value,
+					method: document.getElementById("method").options[document.getElementById("method").selectedIndex].text,
+					content: document.getElementById("bodyRequestListItem").value,
+					headers: headers
+				})
+			}));
+
+		document.getElementById('historyContainer').textContent = httptool.history;
 	},
 
 	reset: function () {
