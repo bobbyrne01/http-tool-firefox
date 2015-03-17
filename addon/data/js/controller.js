@@ -100,8 +100,8 @@ self.port.on("response", function (payload) {
 
 
 	// handle status code and text
-	document.getElementById("status").textContent = response.status;
-	document.getElementById("statusText").textContent = response.statusText;
+	document.getElementById("status").textContent = response.statusText;
+	document.getElementById('statusListItem').textContent = 'Status (' + response.status + ')';
 
 	if (response.status >= 200 && response.status <= 299) {
 		document.getElementById("statusListItem").style.backgroundColor = '#99FF66';
@@ -197,6 +197,61 @@ var httptool = {
 	},
 	populateHistory: function () {
 
+		// restore previous query parameters in UI
+		function historySelected(query) {
+
+			// url
+			document.getElementById("url").value = query.url;
+
+			// method
+			for (var j = 0; j < document.getElementById('method').length; j++) {
+				if (document.getElementById('method').options[j].text === query.method) {
+					document.getElementById('method').value = j;
+				}
+			}
+
+			// headers
+			var rows = document.getElementById('headersRequestTable').rows;
+			var a = rows.length;
+			while (--a) {
+				rows[a].parentNode.removeChild(rows[a]);
+			}
+
+			for (var property in query.headers) {
+				if (query.headers.hasOwnProperty(property)) {
+
+					var tr = document.createElement("tr"),
+						tdName = document.createElement("td"),
+						tdValue = document.createElement("td"),
+						inputName = document.createElement("input"),
+						inputValue = document.createElement("input"),
+						inputButton = document.createElement("input");
+
+					inputName.value = property;
+					inputValue.value = query.headers[property];
+
+					inputButton.type = "button";
+					inputButton.value = "-";
+					inputButton.onclick = function () {
+						document.getElementById('headersRequestTable').deleteRow(this.parentNode.rowIndex);
+					};
+
+					tdName.appendChild(inputName);
+					tdValue.appendChild(inputValue);
+					tr.appendChild(tdName);
+					tr.appendChild(tdValue);
+					tr.appendChild(inputButton);
+					document.getElementById("headersRequestTable").appendChild(tr);
+				}
+			}
+
+			// content
+			if (query.centent !== undefined) {
+				document.getElementById('bodyRequestListItem').value = query.centent;
+			}
+		}
+
+		// clean history container
 		while (document.getElementById("historyContainer").firstChild) {
 			document.getElementById("historyContainer").removeChild(document.getElementById("historyContainer").firstChild);
 		}
@@ -209,16 +264,28 @@ var httptool = {
 
 			var tr = document.createElement("tr"),
 				tdName = document.createElement("td"),
-				tdValue = document.createElement("td");
+				tdValue = document.createElement("td"),
+				tdData = document.createElement("td");
 
 			tdName.className = 'w40';
 			tdValue.className = 'w60';
+			tdData.style.display = 'none';
 
 			tdName.appendChild(document.createTextNode(JSON.parse(JSON.parse(httptool.history[i]).query).method));
 			tdValue.appendChild(document.createTextNode(JSON.parse(JSON.parse(httptool.history[i]).query).url));
+			tdData.textContent = JSON.parse(JSON.parse(httptool.history[i]).query);
+			var query = JSON.parse(JSON.parse(httptool.history[i]).query);
+
 			tr.appendChild(tdName);
 			tr.appendChild(tdValue);
+			tr.appendChild(tdData);
 			table.appendChild(tr);
+
+			tr.onclick = (function (query) {
+				return function () {
+					historySelected(query);
+				};
+			})(query);
 		}
 	}
 };
