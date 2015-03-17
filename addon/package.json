@@ -1,12 +1,12 @@
 {
-	"name": "http-tool-firefox",
-	"title": "HTTP Tool",
-	"id": "jid1-qLJSwFs6qrJBVg",
-	"description": "Submit http requests with varying headers, bodies etc",
-	"author": "Robert Byrne",
-	"license": "GNU GPL v3",
-	"version": "0.2.2",
-	"permissions": {
-		"private-browsing": true
-	}
+  "name": "http-tool-firefox",
+  "title": "HTTP Tool",
+  "id": "jid1-qLJSwFs6qrJBVg",
+  "description": "Submit http requests with varying headers, bodies etc",
+  "author": "Robert Byrne",
+  "license": "GNU GPL v3",
+  "version": "0.3.0",
+  "permissions": {
+    "private-browsing": true
+  }
 }
