@@ -6,3 +6,10 @@ http-tool-firefox
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 Submit http requests with varying methods, headers and bodies
+
+### Features
+
+* HTTP methods .. GET, HEAD, POST, PUT, DELETE
+* Set request headers and body content
+* Previous requests can be reused by clicking them in history
+* View headers, body and status of responses
