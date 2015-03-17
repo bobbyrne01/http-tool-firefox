@@ -19,6 +19,14 @@ window.addEventListener('click', function (event) {
 	} else if (event.target.id.indexOf('newHeaderButton') === 0) {
 
 		httptool.addHeader();
+
+	} else if (event.target.id.indexOf('clipboard') === 0) {
+
+		self.postMessage(
+			JSON.stringify({
+				operation: 'clipboard',
+				value: document.getElementById('bodyContent').textContent
+			}));
 	}
 }, false);
 
@@ -73,29 +81,31 @@ self.port.on("response", function (payload) {
 
 	// handle body content
 	if (response.text === "") {
-		document.getElementById("body").textContent = "No body content.";
+		document.getElementById("bodyContent").textContent = "No body content.";
+		document.getElementById('clipboard').style.display = 'none';
 	} else {
 
-		document.getElementById("body").textContent = "";
+		document.getElementById("bodyContent").textContent = "";
 		var pre = document.createElement('pre');
 		pre.id = "bodyCode";
 
 		try {
 
-			document.getElementById("body").appendChild(pre);
+			document.getElementById("bodyContent").appendChild(pre);
 
 			var highlightedJson = syntaxHighlight(JSON.stringify(JSON.parse(response.text), undefined, 4)),
 				range = document.createRange();
 
 			range.selectNode(pre);
 			var docFrag = range.createContextualFragment(highlightedJson);
-
 			document.getElementById("bodyCode").appendChild(docFrag);
 
 		} catch (e) {
 			pre.appendChild(document.createTextNode(response.text));
-			document.getElementById("body").appendChild(pre);
+			document.getElementById("bodyContent").appendChild(pre);
 		}
+
+		document.getElementById('clipboard').style.display = 'inline';
 	}
 
 

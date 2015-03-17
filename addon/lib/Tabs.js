@@ -2,6 +2,7 @@ var Tabs = require("sdk/tabs"),
 	Data = require("./Data"),
 	Request = require("./Request"),
 	SimpleStorage = require("./SimpleStorage"),
+	Clipboard = require("./Clipboard"),
 	worker;
 
 exports.open = function () {
@@ -22,6 +23,10 @@ function open(state) {
 					if (input.operation === 'submit') {
 						Request.submitRequest(input.query);
 						SimpleStorage.getHistory().push(input.query);
+
+					} else if (input.operation === 'clipboard') {
+
+						Clipboard.set(input.value);
 					}
 				}
 			});
