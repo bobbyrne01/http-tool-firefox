@@ -1,5 +1,5 @@
 var Request = require("sdk/request").Request,
-	Tabs = require("./Tabs");
+  Tabs = require("./Tabs");
 
 function submitRequest(queryString) {
 
@@ -45,7 +45,6 @@ function submitRequest(queryString) {
 		}
 
 	} catch (e) {
-
 		Tabs.sendMsg('error', 'Error occurred.');
 	}
 }

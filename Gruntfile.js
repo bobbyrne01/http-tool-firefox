@@ -69,25 +69,6 @@ module.exports = function (grunt) {
 				max_jshint_notifications: 2,
 				success: true
 			}
-		},
-		release: {
-			options: {
-				file: 'package.json',
-				additionalFiles: ['addon/package.json'],
-				bump: true,
-				add: true,
-				commit: true,
-				tag: true,
-				push: true,
-				pushTags: true,
-				npm: false,
-				npmtag: false,
-				github: {
-					repo: 'bobbyrne01/http-tool-firefox',
-					usernameVar: 'GITHUB_USERNAME',
-					passwordVar: 'GITHUB_PASSWORD'
-				}
-			}
 		}
 	});
 
@@ -96,7 +77,6 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks("grunt-jsbeautifier");
 	grunt.loadNpmTasks('grunt-html');
 	grunt.loadNpmTasks('grunt-contrib-csslint');
-	grunt.loadNpmTasks('grunt-release');
 
 	grunt.registerTask('default', ['jsbeautifier', 'jshint', 'htmllint', 'csslint']);
 	grunt.task.run('notify_hooks');
