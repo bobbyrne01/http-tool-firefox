@@ -19,8 +19,6 @@
 	"homepage": "https://github.com/bobbyrne01/http-tool-firefox",
 	"devDependencies": {
 		"grunt": "1.0.1",
-		"grunt-contrib-csslint": "1.0.0",
-		"grunt-html": "7.0.0",
 		"grunt-jsbeautifier": "0.2.12",
     "jshint": "2.9.2"
 	}

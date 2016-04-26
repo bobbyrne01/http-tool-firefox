@@ -38,28 +38,10 @@ module.exports = function (grunt) {
 					indentSize: 1
 				}
 			}
-		},
-		htmllint: {
-			all: {
-				options: {
-					ignore: 'Empty heading.'
-				},
-				src: "addon/data/html/*.html"
-			}
-		},
-		csslint: {
-			strict: {
-				options: {
-					import: 2
-				},
-				src: ['addon/data/css/*.css']
-			}
 		}
 	});
 
 	grunt.loadNpmTasks("grunt-jsbeautifier");
-	grunt.loadNpmTasks('grunt-html');
-	grunt.loadNpmTasks('grunt-contrib-csslint');
 
-	grunt.registerTask('default', ['jsbeautifier', 'htmllint', 'csslint']);
+	grunt.registerTask('default', ['jsbeautifier']);
 };
