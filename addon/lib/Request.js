@@ -1,5 +1,5 @@
 var Request = require("sdk/request").Request,
-  Tabs = require("./Tabs");
+	Tabs = require("./Tabs");
 
 function submitRequest(queryString) {
 

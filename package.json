@@ -4,7 +4,8 @@
 	"description": "Submit http requests with varying headers, bodies etc",
 	"main": "addon/lib/main.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "jshint addon/data/js/controller.js addon/lib/*.js"
 	},
 	"repository": {
 		"type": "git",
@@ -19,9 +20,8 @@
 	"devDependencies": {
 		"grunt": "1.0.1",
 		"grunt-contrib-csslint": "1.0.0",
-		"grunt-contrib-jshint": "^1.0.0",
 		"grunt-html": "7.0.0",
 		"grunt-jsbeautifier": "0.2.12",
-		"grunt-notify": "0.4.5"
+    "jshint": "2.9.2"
 	}
 }

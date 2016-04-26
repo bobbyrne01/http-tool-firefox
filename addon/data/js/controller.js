@@ -242,9 +242,7 @@ var httptool = {
 
 					inputButton.type = "button";
 					inputButton.value = "-";
-					inputButton.onclick = function () {
-						document.getElementById('headersRequestTable').deleteRow(this.parentNode.rowIndex);
-					};
+					inputButton.onclick = deleteRow;
 
 					tdName.appendChild(inputName);
 					tdValue.appendChild(inputValue);
@@ -291,11 +289,13 @@ var httptool = {
 			tr.appendChild(tdData);
 			table.appendChild(tr);
 
+			/* jshint ignore:start */ //TODO Only workaround atm is to hide function creation outside loop, not really solution
 			tr.onclick = (function (query) {
 				return function () {
 					historySelected(query);
 				};
 			})(query);
+			/* jshint ignore:end */
 		}
 	}
 };
@@ -323,4 +323,8 @@ function syntaxHighlight(json) {
 		}
 		return '<span class="' + cls + '">' + match + '</span>';
 	});
+}
+
+function deleteRow() {
+	document.getElementById('headersRequestTable').deleteRow(this.parentNode.rowIndex);
 }
