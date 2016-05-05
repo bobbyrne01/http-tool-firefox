@@ -5,7 +5,7 @@
 	"description": "Submit http requests with varying headers, bodies etc",
 	"author": "Robert Byrne",
 	"license": "GNU GPL v3",
-	"version": "0.3.1",
+	"version": "0.3.2",
 	"main": "lib/main.js",
 	"permissions": {
 		"private-browsing": true

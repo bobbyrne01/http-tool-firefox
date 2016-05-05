@@ -1,6 +1,6 @@
 {
 	"name": "http-tool-firefox",
-	"version": "0.3.1",
+	"version": "0.3.2",
 	"description": "Submit http requests with varying headers, bodies etc",
 	"main": "addon/lib/main.js",
 	"scripts": {
